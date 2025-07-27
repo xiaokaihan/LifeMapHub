@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import About from './components/About';
+import Journey from './components/Journey';
+import Now from './components/Now';
+import Future from './components/Future';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+      <Header />
+      
+      <main>
+        <Hero />
+        
+        <section id="about" className="py-20">
+          <About />
+        </section>
+        
+        <section id="journey" className="py-20 bg-gray-50 dark:bg-gray-800">
+          <Journey />
+        </section>
+        
+        <section id="now" className="py-20">
+          <Now />
+        </section>
+        
+        <section id="future" className="py-20 bg-gray-50 dark:bg-gray-800">
+          <Future />
+        </section>
+        
+        <section id="projects" className="py-20">
+          <Projects />
+        </section>
+        
+        <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
+          <Contact />
+        </section>
+      </main>
+      
+      <Footer />
     </div>
   );
 }
 
-export default App;
+export default App; 
