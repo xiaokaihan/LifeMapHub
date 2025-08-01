@@ -5,10 +5,20 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* 为固定头部预留空间 */
   }
   
   body {
     @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+    /* 优化滚动性能 */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y proximity;
+  }
+
+  /* 为每个 section 添加滚动锚点优化 */
+  section {
+    scroll-snap-align: start;
+    scroll-margin-top: 80px;
   }
 
   h1 {
@@ -25,5 +35,59 @@
 
   h4 {
     @apply text-xl font-semibold md:text-2xl;
+  }
+}
+
+@layer components {
+  /* 菜单项悬停动画 */
+  .nav-link {
+    @apply relative transition-all duration-300 ease-in-out;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  /* 快速翻页动画辅助类 */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    transition: scroll-behavior 0.3s ease;
+  }
+}
+
+@layer utilities {
+  /* 减少动画对于偏好减少动效的用户 */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* 优化滚动条样式 */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-500;
   }
 } 

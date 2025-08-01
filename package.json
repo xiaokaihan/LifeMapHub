@@ -1,6 +1,18 @@
 {
   "name": "lifemaphub",
   "version": "0.1.0",
+  "description": "个人主页 - 展示个人背景、现状和未来规划的静态网站，使用 React + TypeScript + Tailwind CSS 构建",
+  "keywords": ["react", "typescript", "tailwind", "portfolio", "personal-website"],
+  "author": "LifeMapHub Team",
+  "license": "MIT",
+  "homepage": "https://github.com/xiaokaihan/LifeMapHub#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaokaihan/LifeMapHub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xiaokaihan/LifeMapHub/issues"
+  },
   "private": true,
   "dependencies": {
     "@heroicons/react": "^2.1.1",
@@ -21,9 +33,26 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:ci": "react-scripts test --coverage --watchAll=false",
+    "test:coverage": "react-scripts test --coverage --watchAll=false --verbose",
+    "eject": "react-scripts eject",
+    "serve": "npx serve -s build -l 3000",
+    "preview": "npm run build && npm run serve",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write src/**/*.{ts,tsx,css,md}",
+    "format:check": "prettier --check src/**/*.{ts,tsx,css,md}",
+    "clean": "rm -rf build node_modules package-lock.json",
+    "clean:build": "rm -rf build",
+    "clean:deps": "rm -rf node_modules package-lock.json",
+    "reinstall": "npm run clean:deps && npm install",
+    "analyze": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
+    "deploy:gh-pages": "npm run build && npx gh-pages -d build",
+    "health-check": "npm run type-check && npm run lint && npm run test:ci"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +77,9 @@
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }
